@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: webserver-replicaset
+  namespace: webapp               # Replicasetの名前
+spec:
+  replicas: 2                     # 複製するPodの数（ここでは3つ）
+  selector:
+    matchLabels:
+      app: webserver              # Podのラベル
+  template:                       # Podのテンプレート
+      metadata:
+        labels:
+          app: webserver          # Podに付与するラベル
+      spec:
+        containers:
+        - image: nginx:latest
+          name: webserver

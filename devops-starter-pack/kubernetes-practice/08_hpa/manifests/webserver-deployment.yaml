@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: webserver-deployment
+  name: webserver-deployment
+  namespace: webapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webserver
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: webserver
+    spec:
+      containers:
+      - image: nginx:1.27-alpine3.19
+        name: webserver
+        resources:
+          requests:
+            memory: "16Mi"
+            cpu: "50m"
+          limits:
+            memory: "32Mi"
+            cpu: "100m"
