@@ -30,3 +30,22 @@ spec:
           limits:
             memory: "32Mi"
             cpu: "100m"
+        volumeMounts:
+          - name: php-sock
+            mountPath: /var/run/php
+      - image: webapp-php:v0.1.0
+        name: app
+        resources:
+          requests:
+            memory: "16Mi"
+            cpu: "50m"
+          limits:
+            memory: "32Mi"
+            cpu: "100m"
+        volumeMounts:
+          - name: php-sock
+            mountPath: /var/run/php
+      volumes:
+        - name: php-sock
+          emptyDir: {}
+
